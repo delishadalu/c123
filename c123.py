@@ -15,6 +15,11 @@ import os
 import ssl
 import time
 
+if (not os.environ.get('PYTHONHTTPSVERIFY', '') and
+    getattr(ssl,'_create_unverified_context',None)):
+        ssl._create_default_https_context= ssl._create_unverified_context
+
+
 cap = cv2.VideoCapture(0)
 while(True):
     ret, frame = cap.read()
